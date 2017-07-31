@@ -1,0 +1,15 @@
+header {
+  background-color: #1F88E2;
+  padding: 17px;
+}
+
+.logo {
+  max-width: 980px;
+  margin: auto;
+  font-size: 15px;
+  color: #FFF;
+}
+
+.logo:before {
+  content: '\e80e';
+}

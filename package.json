@@ -4,6 +4,10 @@
   "private": true,
   "dependencies": {
     "bulma": "^0.5.0",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-jest": "^20.0.3",
+    "pre-commit": "^1.2.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
@@ -14,10 +18,14 @@
   "devDependencies": {
     "react-scripts": "1.0.10"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src"
   }
 }

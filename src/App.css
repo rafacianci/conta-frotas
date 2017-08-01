@@ -1,25 +1,12 @@
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+body, html {
+  background-color: #F1F4F9;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.button {
+  background-color: #F1F4F9;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.icon:before {
+.logo:before {
   font-family: fontello;
   font-style: normal;
   font-weight: 400;
@@ -34,6 +21,11 @@
   margin-left: .2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 980px;
+  margin: auto;
 }
 
 .hidden {

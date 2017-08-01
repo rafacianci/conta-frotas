@@ -3,7 +3,9 @@ import './style.css';
 
 const header = () => (
     <header>
-        <h1 className='icon logo'><span className='hidden'>Conta Azul - Tropas</span></h1>
+        <div className='container'>
+            <h1 className='logo'><span className='hidden'>Conta Azul - Tropas</span></h1>
+        </div>
     </header>
 );
 

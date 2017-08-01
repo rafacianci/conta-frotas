@@ -1,0 +1,40 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px auto;
+}
+
+.table {
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.table thead {
+  background-color: #F8FAFC;
+}
+
+.table thead th {
+  color: #385C78;
+  font-size: 13px;
+}
+
+.table tbody td {
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 30px;
+}
+
+.table tbody tr:hover {
+  background-color: #D7E9FA;
+}
+
+.table tbody tr:hover td {
+  border-bottom: 1px solid #87C8F2;
+  border-top: 1px solid #87C8F2;
+  background-color: #D7E9FA;
+}
+
+.table tbody a {
+  color: #4A9EE7;
+}

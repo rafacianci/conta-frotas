@@ -17,6 +17,22 @@
 .table thead th {
   color: #385C78;
   font-size: 13px;
+  padding: 10px 15px;
+}
+
+.table tbody .edit-link {
+  display: table-row;
+  color: inherit;
+}
+
+.table tbody > .edit-link:hover {
+  background-color: #D7E9FA;
+}
+
+.table tbody > .edit-link:hover td {
+  border-bottom: 1px solid #87C8F2;
+  border-top: 1px solid #87C8F2;
+  background-color: #D7E9FA;
 }
 
 .table tbody td {
@@ -25,16 +41,6 @@
   line-height: 30px;
 }
 
-.table tbody tr:hover {
-  background-color: #D7E9FA;
-}
-
-.table tbody tr:hover td {
-  border-bottom: 1px solid #87C8F2;
-  border-top: 1px solid #87C8F2;
-  background-color: #D7E9FA;
-}
-
-.table tbody a {
+.image-link {
   color: #4A9EE7;
 }

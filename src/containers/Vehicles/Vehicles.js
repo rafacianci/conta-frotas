@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.css';
 
 const vehicles = [
@@ -39,16 +40,15 @@ const getVehicleImage = (img) => {
   }
 
   return (
-    <a href={img} target='_blank'>Imagem</a>
+    <a href={img} className='image-link' target='_blank'>Imagem</a>
   );
 };
 
 const Vehicles = () => (
   <div className='container'>
     <div className='actions'>
-      <button className='button is-success'>Novo Carro</button>
-
-      <div className='field has-addons is-right'>
+      <Link to='/new' className='button is-success'>Novo Carro</Link>
+      <div className='field has-addons'>
         <div className='control'>
           <input className='input' type='text' placeholder='Pesquisar' />
         </div>
@@ -80,14 +80,14 @@ const Vehicles = () => (
         <tbody>
           {
             vehicles.map(vehicle => (
-              <tr key={vehicle.id} >
+              <Link key={vehicle.id} to={`/${vehicle.id}`} className='edit-link'>
                 <td>{ vehicle.placa }</td>
                 <td>{ vehicle.modelo }</td>
                 <td>{ vehicle.marca }</td>
                 <td>{ getVehicleImage(vehicle.imagem) }</td>
                 <td>{ vehicle.combustivel }</td>
                 <td>{ vehicle.valor }</td>
-              </tr>
+              </Link>
             ))
           }
         </tbody>

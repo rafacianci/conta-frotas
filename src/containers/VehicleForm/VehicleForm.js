@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import CurrencyInput from 'react-currency-input';
+import { getVehicle, clearEdition, save } from '../../actions/vehicle';
 import './style.css';
 
 class VehicleForm extends Component {
@@ -10,6 +12,23 @@ class VehicleForm extends Component {
     this.state = {
       form: {},
     };
+
+    if (props.match.params && props.match.params.vehicleId !== 'new') {
+      props.getVehicle(props.match.params.vehicleId);
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.vehicle && !this.state.form.id) {
+      this.setState({
+        floatValue: props.vehicle.valor,
+        form: props.vehicle,
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.clearEdition();
   }
 
   handleChange(input, value) {
@@ -23,7 +42,8 @@ class VehicleForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ submitted: true });
+    this.props.save(this.state.form);
+    this.props.history.push('/');
   }
 
   changeValor(event, maskedValue, floatValue) {
@@ -88,15 +108,15 @@ class VehicleForm extends Component {
           </div>
         </div>
         <div className='field column is-6'>
-          <label htmlFor='foto' className='label'>Foto</label>
+          <label htmlFor='imagem' className='label'>Foto</label>
           <div className='control'>
             <input
-              name='foto'
+              name='imagem'
               className='input'
               type='text'
               placeholder='http://...'
-              value={this.state.form.foto}
-              onChange={(event) => this.handleChange('foto', event.target.value)}
+              value={this.state.form.imagem}
+              onChange={(event) => this.handleChange('imagem', event.target.value)}
             />
           </div>
         </div>
@@ -139,4 +159,12 @@ class VehicleForm extends Component {
   }
 }
 
-export default VehicleForm;
+const mapStateProps = ({ vehicle }) => ({
+  vehicle: vehicle.vehicle,
+});
+
+export default connect(mapStateProps, {
+  getVehicle,
+  clearEdition,
+  save,
+})(VehicleForm);

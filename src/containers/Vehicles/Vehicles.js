@@ -1,36 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import './style.css';
-
-const vehicles = [
-  {
-    combustivel: 'Flex',
-    imagem: null,
-    marca: 'Volkswagem',
-    modelo: 'Gol',
-    placa: 'FFF-5498',
-    valor: 20000,
-    id: 1,
-  },
-  {
-    combustivel: 'Gasolina',
-    imagem: null,
-    marca: 'Volkswagem',
-    modelo: 'Fox',
-    placa: 'FOX-4125',
-    valor: 20000,
-    id: 2,
-  },
-  {
-    combustivel: 'Alcool',
-    imagem: 'http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg',
-    marca: 'Volkswagen',
-    modelo: 'Fusca',
-    placa: 'PAI-4121',
-    valor: 20000,
-    id: 3,
-  },
-];
 
 const getVehicleImage = (img) => {
   if (!img) {
@@ -44,7 +15,7 @@ const getVehicleImage = (img) => {
   );
 };
 
-const Vehicles = () => (
+const Vehicles = ({ vehicles }) => (
   <div className='container'>
     <div className='actions'>
       <Link to='/new' className='button is-success'>Novo Carro</Link>
@@ -79,7 +50,7 @@ const Vehicles = () => (
         </thead>
         <tbody>
           {
-            vehicles.map(vehicle => (
+            vehicles.map((vehicle) => (
               <Link key={vehicle.id} to={`/${vehicle.id}`} className='edit-link'>
                 <td>{ vehicle.placa }</td>
                 <td>{ vehicle.modelo }</td>
@@ -96,4 +67,8 @@ const Vehicles = () => (
   </div>
 );
 
-export default Vehicles;
+const mapStateProps = ({ vehicle }) => ({
+  vehicles: vehicle.vehicles,
+});
+
+export default connect(mapStateProps, {})(Vehicles);

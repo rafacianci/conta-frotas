@@ -1,5 +1,8 @@
 In this project directory, you can run:
 
+### `npm install`
+Install all the necessary dependencies.
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
@@ -20,5 +23,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
-
-See the section about [deployment](#deployment) for more information.

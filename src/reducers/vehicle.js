@@ -1,4 +1,9 @@
-import { GET_VEHICLE, CLEAR_EDITION, SAVE_VEHICLE } from '../actions/types';
+import {
+  GET_VEHICLE,
+  CLEAR_EDITION,
+  SAVE_VEHICLE,
+  SEARCH_VEHICLE,
+} from '../actions/types';
 
 const initialState = {
   vehicles: [
@@ -33,6 +38,16 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  if (action.type === SEARCH_VEHICLE) {
+    return {
+      ...state,
+      results: state.vehicles.filter((vehicle) => (
+        vehicle.combustivel.toLowerCase().indexOf(action.payload.toLowerCase()) >= 0 ||
+        vehicle.marca.toLowerCase().indexOf(action.payload.toLowerCase()) >= 0
+      )),
+    };
+  }
+
   if (action.type === GET_VEHICLE) {
     return {
       ...state,
@@ -54,6 +69,7 @@ export default (state = initialState, action) => {
       vehicles[updateIndex] = action.payload;
 
       return {
+        ...state,
         vehicle: null,
         vehicles,
       };

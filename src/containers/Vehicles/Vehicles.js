@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { search } from '../../actions/vehicle';
+import Pagination from '../../components/Pagination';
+import {
+  filterVehicles,
+  getVehiclesByPage,
+  getPaginationConfig,
+} from '../../utils';
 import './style.css';
 
 const getVehicleImage = (img) => {
@@ -16,38 +21,27 @@ const getVehicleImage = (img) => {
   );
 };
 
-const renderVehicle = (vehicle) => (
-  <Link key={vehicle.id} to={`/${vehicle.id}`} className='edit-link'>
-    <td>{ vehicle.placa }</td>
-    <td>{ vehicle.modelo }</td>
-    <td>{ vehicle.marca }</td>
-    <td>{ getVehicleImage(vehicle.imagem) }</td>
-    <td>{ vehicle.combustivel }</td>
-    <td>{ vehicle.valor }</td>
-  </Link>
-);
-
 class Vehicles extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-  }
-
-  getVehicles() {
-    if (this.props.results) {
-      return this.props.results.map(renderVehicle);
-    }
-
-    return this.props.vehicles.map(renderVehicle);
+    this.state = {
+      activePage: 1,
+      vehicles: props.vehicles,
+    };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.search(this.state.search);
+    this.setState({
+      vehicles: filterVehicles(this.props.vehicles, this.state.search),
+    });
   }
 
   render() {
+    const vehicles = getVehiclesByPage(this.state.vehicles, this.state.activePage);
+    const config = getPaginationConfig(this.state.vehicles, this.state.activePage);
+
     return (
       <div className='container'>
         <div className='actions'>
@@ -88,10 +82,25 @@ class Vehicles extends Component {
               </tr>
             </thead>
             <tbody>
-              { this.getVehicles() }
+              {
+                vehicles.map((vehicle) => (
+                  <Link key={vehicle.id} to={`/${vehicle.id}`} className='edit-link'>
+                    <td>{ vehicle.placa }</td>
+                    <td>{ vehicle.modelo }</td>
+                    <td>{ vehicle.marca }</td>
+                    <td>{ getVehicleImage(vehicle.imagem) }</td>
+                    <td>{ vehicle.combustivel }</td>
+                    <td>{ vehicle.valor }</td>
+                  </Link>
+                ))
+              }
             </tbody>
           </table>
         </div>
+        <Pagination
+          config={config}
+          onChangePage={(activePage) => this.setState({ activePage })}
+        />
       </div>
     );
   }
@@ -102,4 +111,4 @@ const mapStateProps = ({ vehicle }) => ({
   results: vehicle.results,
 });
 
-export default connect(mapStateProps, { search })(Vehicles);
+export default connect(mapStateProps, null)(Vehicles);

@@ -2,7 +2,6 @@ import {
   GET_VEHICLE,
   CLEAR_EDITION,
   SAVE_VEHICLE,
-  SEARCH_VEHICLE,
 } from './types';
 
 export const getVehicle = (id) => ({
@@ -17,9 +16,4 @@ export const clearEdition = () => ({
 export const save = (vehicle) => ({
   type: SAVE_VEHICLE,
   payload: vehicle,
-});
-
-export const search = (value) => ({
-  type: SEARCH_VEHICLE,
-  payload: value,
 });

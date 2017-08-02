@@ -10,7 +10,9 @@ class VehicleForm extends Component {
     super(props);
 
     this.state = {
-      form: {},
+      form: {
+        combustivel: 'Alcool',
+      },
     };
 
     if (props.match.params && props.match.params.vehicleId !== 'new') {
@@ -21,7 +23,6 @@ class VehicleForm extends Component {
   componentWillReceiveProps(props) {
     if (props.vehicle && !this.state.form.id) {
       this.setState({
-        floatValue: props.vehicle.valor,
         form: props.vehicle,
       });
     }
@@ -46,11 +47,10 @@ class VehicleForm extends Component {
     this.props.history.push('/');
   }
 
-  changeValor(event, maskedValue, floatValue) {
+  changeValor(event, maskedValue) {
     event.preventDefault();
 
     this.setState({
-      floatValue,
       form: {
         ...this.state.form,
         valor: maskedValue,
@@ -143,10 +143,10 @@ class VehicleForm extends Component {
               name='valor'
               className='input'
               type='text'
-              value={this.state.floatValue}
+              value={this.state.form.valor}
               decimalSeparator=','
               thousandSeparator='.'
-              onChangeEvent={(event, masked, float) => this.changeValor(event, masked, float)}
+              onChangeEvent={(event, masked) => this.changeValor(event, masked)}
             />
           </div>
         </div>
